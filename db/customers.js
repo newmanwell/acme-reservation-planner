@@ -3,7 +3,7 @@ const client = require('./client.js');
 const createCustomer = async(customerName) => {
   try {
     const { rows } = await client.query(`
-      INSERT INTO customers (name)
+      INSERT INTO customer (name)
       VALUES ('${customerName}')
       RETURNING *;
       `);
