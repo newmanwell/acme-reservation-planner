@@ -9,10 +9,20 @@ const createCustomer = async(customerName) => {
       `);
       const customer = rows[0];
       return customer;
-    console.log(x);
   } catch(error) {
     console.log(error);
   }
 }
 
-module.exports = { createCustomer };
+const fetchCustomers = async() => {
+  try {
+    const { rows } = await client.query(`
+        SELECT * FROM customer;
+      `)
+      return rows;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+module.exports = { createCustomer, fetchCustomers };

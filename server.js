@@ -9,7 +9,7 @@ app.use(express.json());
 const client = require('./db/client.js');
 client.connect();
 
-const { createCustomer } = require('./db/customers.js')
+const { createCustomer, fetchCustomers } = require('./db/customers.js')
 
 // Add a customer
 app.post('/api/customers', async(req, res) => {
@@ -21,7 +21,16 @@ app.post('/api/customers', async(req, res) => {
   } catch(error) {
     console.log(error);
   }
-})
+});
+
+// Show customers
+app.get('/api/customers', async(req, res) => {
+  try {
+    res.send(await fetchCustomers());
+  } catch(error) {
+    console.log(error);
+  }
+});
 
 
 
