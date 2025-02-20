@@ -1,14 +1,40 @@
 const client = require('./client.js');
 
 
+const createTables = async() => {
+  try {
+    await client.query(`
+      CREATE TABLE customer (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(29) NOT NULL
+      );
 
+      CREATE TABLE restaurant (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(38) UNIQUE NOT NULL
+      );
+
+      CREATE TABLE reservation (
+        id SERIAL PRIMARY KEY,
+        date DATE NOT NULL,
+        party_count INTEGER NOT NULL,
+        restaurant_id INTEGER REFERENCES restaurant(id),
+        customer_id INTEGER REFERENCES customer(id)
+      );
+    `);
+  } catch(error) {
+    console.log(error);
+  }
+}
 
 const syncAndSeed = async() => {
   try {
     await client.connect();
     console.log('Connected to acme_reservation DB');
 
-
+    console.log('Creating Tables');
+    await createTables();
+    console.log('Tables Created');
 
 
 
