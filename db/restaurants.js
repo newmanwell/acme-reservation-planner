@@ -14,4 +14,15 @@ const createRestaurant = async(restaurantName) => {
   }
 }
 
-module.exports = { createRestaurant };
+const fetchRestaurants = async() => {
+  try {
+    const { rows } = await client.query(`
+        SELECT * FROM restaurant  
+      `)
+      return rows;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+module.exports = { createRestaurant, fetchRestaurants };

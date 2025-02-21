@@ -45,6 +45,10 @@ app.post('/api/restaurants', async(req, res) => {
   }
 });
 
+// Show Restaurants
+app.get ('/api/restaurants', async(req, res) => {
+  res.send('What up?')
+})
 
 
 
