@@ -11,6 +11,7 @@ client.connect();
 
 const { createCustomer, fetchCustomers } = require('./db/customers.js');
 const { createRestaurant, fetchRestaurants } = require('./db/restaurants.js');
+const { createReservation } = require('./db/reservations.js')
 
 // Add a customer
 app.post('/api/customers', async(req, res) => {
@@ -54,6 +55,18 @@ app.get('/api/restaurants', async(req, res) => {
   }
 });
 
+// Add reservation
+app.post('/api/customers/:id/reservations', async(req, res) => {
+  const { id } = req.params;
+  const { restaurant_id, date, party_count } = req.body;
+
+  try {
+    const newReservation = await createReservation(date, party_count, restaurant_id, id)
+    res.status(200).send(newReservation);
+  } catch(error) {
+    console.log(error);
+  }
+});
 
 
 
