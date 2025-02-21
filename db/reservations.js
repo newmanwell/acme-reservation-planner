@@ -14,4 +14,15 @@ const createReservation = async(date, partyCount, restId, custId) => {
   }
 }
 
-module.exports = { createReservation }
+const destroyReservation = async(deletedReservation) => {
+  try {
+    const { rows } = await client.query(`
+        DELETE FROM reservation WHERE id=${deletedReservation}
+      `)
+      return rows;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+module.exports = { createReservation, destroyReservation }

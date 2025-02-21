@@ -11,7 +11,7 @@ client.connect();
 
 const { createCustomer, fetchCustomers } = require('./db/customers.js');
 const { createRestaurant, fetchRestaurants } = require('./db/restaurants.js');
-const { createReservation } = require('./db/reservations.js')
+const { createReservation, destroyReservation } = require('./db/reservations.js')
 
 // Add a customer
 app.post('/api/customers', async(req, res) => {
@@ -62,16 +62,22 @@ app.post('/api/customers/:id/reservations', async(req, res) => {
 
   try {
     const newReservation = await createReservation(date, party_count, restaurant_id, id)
-    res.status(200).send(newReservation);
+    res.status(201).send(newReservation);
   } catch(error) {
     console.log(error);
   }
 });
 
+// DESTROY!!!!!! Reso
+app.delete('/api/customers/:customer_id/reservations/:id', async(req, res) =>{
+  const { id } = req.params;
 
-
-
-
-
+  try {
+    const seekAndDestroy = await destroyReservation(id);
+    res.send(204);
+  } catch(error) {
+    console.log(error);
+  }
+})
 
 app.listen(port, () => console.log(`Listening on port: ${port}`));
