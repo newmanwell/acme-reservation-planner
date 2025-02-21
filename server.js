@@ -10,7 +10,7 @@ const client = require('./db/client.js');
 client.connect();
 
 const { createCustomer, fetchCustomers } = require('./db/customers.js')
-const { createRestaurant } = require('./db/restaurants.js')
+const { createRestaurant, fetchRestaurants } = require('./db/restaurants.js')
 
 // Add a customer
 app.post('/api/customers', async(req, res) => {
@@ -46,9 +46,13 @@ app.post('/api/restaurants', async(req, res) => {
 });
 
 // Show Restaurants
-app.get ('/api/restaurants', async(req, res) => {
-  res.send('What up?')
-})
+app.get('/api/restaurants', async(req, res) => {
+  try {
+    res.send(await fetchRestaurants());
+  } catch(error) {
+    console.log(error);
+  }
+});
 
 
 
