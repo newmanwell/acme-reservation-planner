@@ -32,6 +32,11 @@ app.get('/api/customers', async(req, res) => {
   }
 });
 
+// Add a restaurant
+app.post('/api/restaurants', async(req, res) => {
+  res.send('Hellow there')
+})
+
 
 
 
