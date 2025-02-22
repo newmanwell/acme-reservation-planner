@@ -1,17 +1,18 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
+const client = require('./db/client.cjs');
+client.connect();
 
 
 app.use(express.json());
+app.use(express.static('dist'));
 
-const client = require('./db/client.js');
-client.connect();
 
-const { createCustomer, fetchCustomers } = require('./db/customers.js');
-const { createRestaurant, fetchRestaurants } = require('./db/restaurants.js');
-const { createReservation, destroyReservation } = require('./db/reservations.js')
+const { createCustomer, fetchCustomers } = require('./db/customers.cjs');
+const { createRestaurant, fetchRestaurants } = require('./db/restaurants.cjs');
+const { createReservation, destroyReservation } = require('./db/reservations.cjs')
 
 // Add a customer
 app.post('/api/customers', async(req, res) => {
