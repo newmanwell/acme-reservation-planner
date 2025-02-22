@@ -6,12 +6,12 @@ const port = 3000;
 
 app.use(express.json());
 
-const client = require('./db/client.js');
+const client = require('./db/client.cjs');
 client.connect();
 
-const { createCustomer, fetchCustomers } = require('./db/customers.js');
-const { createRestaurant, fetchRestaurants } = require('./db/restaurants.js');
-const { createReservation, destroyReservation } = require('./db/reservations.js')
+const { createCustomer, fetchCustomers } = require('./db/customers.cjs');
+const { createRestaurant, fetchRestaurants } = require('./db/restaurants.cjs');
+const { createReservation, destroyReservation } = require('./db/reservations.cjs')
 
 // Add a customer
 app.post('/api/customers', async(req, res) => {
