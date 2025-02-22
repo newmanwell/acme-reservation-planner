@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 
 import CustomerList from './components/Customers.jsx';
 
@@ -8,6 +8,7 @@ const App = () => {
     <>
       <h1>Front End!</h1>
       <nav>
+        <Link to="/customers">See Customers</Link>
       </nav>
       <div>
         <Routes>

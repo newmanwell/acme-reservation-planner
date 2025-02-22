@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
-const port = 3000;
-
-
-
-app.use(express.json());
+const port = process.env.PORT || 3000;
 
 const client = require('./db/client.cjs');
 client.connect();
+
+
+app.use(express.json());
+app.use(express.static('dist'));
+
 
 const { createCustomer, fetchCustomers } = require('./db/customers.cjs');
 const { createRestaurant, fetchRestaurants } = require('./db/restaurants.cjs');
