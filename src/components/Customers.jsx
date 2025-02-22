@@ -11,7 +11,6 @@ const CustomerList = () => {
     }
     getAllCustomers();
   }, []);
-  console.log(customers);
 
   return (
     <ol>
